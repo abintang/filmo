@@ -79,7 +79,7 @@ class UserPage extends StatelessWidget {
                   ],
                 );
               } else {
-                return SizedBox();
+                return const SizedBox();
               }
             }),
             Container(
@@ -116,6 +116,19 @@ class UserPage extends StatelessWidget {
                         );
                       }),
                 );
+              } else if (state is LoadingWatchlistState) {
+                return LimitedBox(
+                  maxHeight: 33.h,
+                  maxWidth: 42.w,
+                  child: ListView.builder(
+                      itemCount: 4,
+                      scrollDirection: Axis.horizontal,
+                      itemBuilder: (context, index) {
+                        return LoadingMovieVerticalCards(
+                          marginLeft: (index == 0) ? 7 : 3,
+                        );
+                      }),
+                );
               } else {
                 return const SizedBox();
               }
@@ -145,6 +158,19 @@ class UserPage extends StatelessWidget {
                           movieTitle: state.movies[index].ellipsizeTitle,
                           imagePath: state.movies[index].imagePath,
                           idMovie: "",
+                        );
+                      }),
+                );
+              } else if (state is LoadingFavoriteState) {
+                return LimitedBox(
+                  maxHeight: 33.h,
+                  maxWidth: 42.w,
+                  child: ListView.builder(
+                      itemCount: 4,
+                      scrollDirection: Axis.horizontal,
+                      itemBuilder: (context, index) {
+                        return LoadingMovieVerticalCards(
+                          marginLeft: (index == 0) ? 7 : 3,
                         );
                       }),
                 );

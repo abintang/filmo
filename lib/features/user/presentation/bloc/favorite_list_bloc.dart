@@ -5,13 +5,13 @@ import 'package:filmo/features/user/presentation/bloc/state/favorite_list_state.
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class FavoriteListBloc extends Bloc<FavoriteListEvent, FavoriteListState> {
-  FavoriteListBloc() : super(LoadingState()) {
+  FavoriteListBloc() : super(LoadingFavoriteState()) {
     on<LoadFavoriteList>(_onLoadFavoriteList);
   }
 
   void _onLoadFavoriteList(
       LoadFavoriteList event, Emitter<FavoriteListState> emit) async {
-    emit(LoadingState());
+    emit(LoadingFavoriteState());
     try {
       final movies = await getIt.get<GetFavoriteList>().call(event.id);
       emit(GetFavoriteListSuccess(movies: movies));

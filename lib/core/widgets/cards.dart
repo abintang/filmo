@@ -1,6 +1,7 @@
 import 'package:filmo/core/constants/api.dart';
 import 'package:filmo/core/constants/app_colors.dart';
 import 'package:filmo/core/widgets/buttons.dart';
+import 'package:filmo/features/detail_movie/presentation/page/detail_movie_page.dart';
 import 'package:flutter/material.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:shimmer/shimmer.dart';
@@ -29,123 +30,142 @@ class MoviesHorizontalCards extends StatelessWidget {
     return Container(
       width: 80.w,
       height: 24.5.h,
-      padding: EdgeInsets.only(top: 2.h, bottom: 2.h, left: 5.w, right: 5.w),
       decoration: BoxDecoration(
           color: AppColors.cardBackgroundColor,
           borderRadius: BorderRadius.circular(10)),
       margin: EdgeInsets.only(left: marginLeft.w, right: 1.w),
-      child: Row(
-        mainAxisSize: MainAxisSize.max,
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              SizedBox(
-                width: 36.w,
-                child: Text(
-                  movieTitle,
-                  style: TextStyle(
-                      color: AppColors.fontColor,
-                      fontSize: 16.sp,
-                      fontWeight: FontWeight.w700),
-                ),
-              ),
-              Row(
-                children: [
-                  Container(
-                    height: 3.5.h,
-                    width: 13.w,
-                    margin: EdgeInsets.only(top: 1.h, right: 1.w),
-                    padding: const EdgeInsets.fromLTRB(5, 2, 5, 2),
-                    decoration: BoxDecoration(
-                      color: AppColors.backgroundColor,
-                      borderRadius: BorderRadius.circular(5),
-                    ),
-                    child: Center(
-                        child: Row(
-                      mainAxisSize: MainAxisSize.max,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Icon(
-                          Icons.star_rate_sharp,
-                          size: 4.w,
-                          color: AppColors.goldColor,
-                        ),
-                        Text(
-                          ratings,
-                          style: TextStyle(
-                              color: AppColors.fontColor,
-                              fontSize: 14.sp,
-                              fontWeight: FontWeight.w600),
-                        ),
-                      ],
-                    )),
-                  ),
-                  Container(
-                    height: 3.5.h,
-                    width: 22.w,
-                    margin: EdgeInsets.only(top: 1.h),
-                    padding: const EdgeInsets.fromLTRB(5, 2, 5, 2),
-                    decoration: BoxDecoration(
-                      color: AppColors.backgroundColor,
-                      borderRadius: BorderRadius.circular(5),
-                    ),
-                    child: Center(
+      child: Material(
+        color: Colors.transparent,
+        borderRadius: BorderRadius.circular(10),
+        child: InkWell(
+          onTap: () {
+            WidgetsBinding.instance.addPostFrameCallback((_) {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) =>
+                          DetailMoviePage(id: int.parse(idMovie))));
+            });
+          },
+          borderRadius: BorderRadius.circular(10),
+          child: Padding(
+            padding:
+                EdgeInsets.only(top: 2.h, bottom: 2.h, left: 5.w, right: 5.w),
+            child: Row(
+              mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    SizedBox(
+                      width: 36.w,
                       child: Text(
-                        releaseDate,
+                        movieTitle,
                         style: TextStyle(
                             color: AppColors.fontColor,
-                            fontSize: 14.sp,
-                            fontWeight: FontWeight.w600),
+                            fontSize: 16.sp,
+                            fontWeight: FontWeight.w700),
                       ),
                     ),
-                  )
-                ],
-              ),
-              Container(
-                margin: EdgeInsets.only(top: 1.h, bottom: 1.h),
-                height: 2,
-                width: 36.w,
-                color: AppColors.cardOutlineColor,
-              ),
-              ButtonWithIcon(
-                  outlineColor: AppColors.primaryColor,
-                  textIconColor: AppColors.primaryColor,
-                  backgroundColorButton: Colors.transparent,
-                  textButton: 'Add to Watchlist',
-                  iconButton: Icons.watch_later_rounded,
-                  onTapButton: () {},
-                  width: 36,
-                  height: 3.5,
-                  fontSize: 14,
-                  iconSize: 4.5),
-              SizedBox(
-                height: 1.h,
-              ),
-              ButtonWithIcon(
-                  outlineColor: AppColors.primaryColor,
-                  textIconColor: AppColors.primaryColor,
-                  backgroundColorButton: Colors.transparent,
-                  textButton: 'Add to Favorite',
-                  iconButton: Icons.favorite,
-                  onTapButton: () {},
-                  width: 36,
-                  height: 3.5,
-                  fontSize: 14,
-                  iconSize: 4.5)
-            ],
-          ),
-          ClipRRect(
-            borderRadius: BorderRadius.circular(10),
-            child: Image.network(
-              Api.imagePath + imagePath,
-              height: 20.h,
-              width: 30.w,
-              fit: BoxFit.cover,
+                    Row(
+                      children: [
+                        Container(
+                          height: 3.5.h,
+                          width: 13.w,
+                          margin: EdgeInsets.only(top: 1.h, right: 1.w),
+                          padding: const EdgeInsets.fromLTRB(5, 2, 5, 2),
+                          decoration: BoxDecoration(
+                            color: AppColors.backgroundColor,
+                            borderRadius: BorderRadius.circular(5),
+                          ),
+                          child: Center(
+                              child: Row(
+                            mainAxisSize: MainAxisSize.max,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Icon(
+                                Icons.star_rate_sharp,
+                                size: 4.w,
+                                color: AppColors.goldColor,
+                              ),
+                              Text(
+                                ratings,
+                                style: TextStyle(
+                                    color: AppColors.fontColor,
+                                    fontSize: 14.sp,
+                                    fontWeight: FontWeight.w600),
+                              ),
+                            ],
+                          )),
+                        ),
+                        Container(
+                          height: 3.5.h,
+                          width: 22.w,
+                          margin: EdgeInsets.only(top: 1.h),
+                          padding: const EdgeInsets.fromLTRB(5, 2, 5, 2),
+                          decoration: BoxDecoration(
+                            color: AppColors.backgroundColor,
+                            borderRadius: BorderRadius.circular(5),
+                          ),
+                          child: Center(
+                            child: Text(
+                              releaseDate,
+                              style: TextStyle(
+                                  color: AppColors.fontColor,
+                                  fontSize: 14.sp,
+                                  fontWeight: FontWeight.w600),
+                            ),
+                          ),
+                        )
+                      ],
+                    ),
+                    Container(
+                      margin: EdgeInsets.only(top: 1.h, bottom: 1.h),
+                      height: 2,
+                      width: 36.w,
+                      color: AppColors.cardOutlineColor,
+                    ),
+                    ButtonWithIcon(
+                        outlineColor: AppColors.primaryColor,
+                        textIconColor: AppColors.primaryColor,
+                        backgroundColorButton: Colors.transparent,
+                        textButton: 'Add to Watchlist',
+                        iconButton: Icons.watch_later_rounded,
+                        onTapButton: () {},
+                        width: 36,
+                        height: 3.5,
+                        fontSize: 14,
+                        iconSize: 4.5),
+                    SizedBox(
+                      height: 1.h,
+                    ),
+                    ButtonWithIcon(
+                        outlineColor: AppColors.primaryColor,
+                        textIconColor: AppColors.primaryColor,
+                        backgroundColorButton: Colors.transparent,
+                        textButton: 'Add to Favorite',
+                        iconButton: Icons.favorite,
+                        onTapButton: () {},
+                        width: 36,
+                        height: 3.5,
+                        fontSize: 14,
+                        iconSize: 4.5)
+                  ],
+                ),
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(10),
+                  child: Image.network(
+                    Api.imagePath + imagePath,
+                    height: 20.h,
+                    width: 30.w,
+                    fit: BoxFit.cover,
+                  ),
+                ),
+              ],
             ),
           ),
-        ],
+        ),
       ),
     );
   }
@@ -248,65 +268,55 @@ class LoadingMoviesHorizontalCards extends StatelessWidget {
   }
 }
 
-class CardLoading extends StatelessWidget {
-  const CardLoading({super.key});
+class LoadingMovieVerticalCards extends StatelessWidget {
+  final double marginLeft;
+  const LoadingMovieVerticalCards({super.key, required this.marginLeft});
 
   @override
   Widget build(BuildContext context) {
-    return LimitedBox(
-      maxHeight: 34.h,
-      child: ListView.builder(
-          itemCount: 10,
-          scrollDirection: Axis.horizontal,
-          itemBuilder: (context, index) {
-            return Container(
-              margin: EdgeInsets.only(left: 4.w),
-              width: 42.w,
-              height: 34.h,
-              padding: const EdgeInsets.all(10),
+    return Container(
+      margin: EdgeInsets.only(left: marginLeft.w, bottom: 1.h),
+      width: 42.w,
+      height: 33.h,
+      padding: const EdgeInsets.all(10),
+      decoration: BoxDecoration(
+          color: AppColors.cardBackgroundColor,
+          borderRadius: BorderRadius.circular(5),
+          border: Border.all(color: AppColors.cardOutlineColor, width: 1)),
+      child: Column(
+        children: [
+          Shimmer.fromColors(
+            baseColor: AppColors.cardBackgroundColor,
+            highlightColor: AppColors.primaryColor.withOpacity(0.2),
+            child: Container(
+              height: 21.h,
               decoration: BoxDecoration(
-                  color: AppColors.cardBackgroundColor,
+                  color: AppColors.backgroundColor,
+                  borderRadius: BorderRadius.circular(5)),
+            ),
+          ),
+          Shimmer.fromColors(
+            baseColor: AppColors.cardBackgroundColor,
+            highlightColor: AppColors.primaryColor.withOpacity(0.2),
+            child: Container(
+              height: 4.5.h,
+              decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(5),
-                  border:
-                      Border.all(color: AppColors.cardOutlineColor, width: 1)),
-              child: Column(
-                children: [
-                  Shimmer.fromColors(
-                    baseColor: AppColors.cardBackgroundColor,
-                    highlightColor: AppColors.primaryColor.withOpacity(0.2),
-                    child: Container(
-                      height: 21.h,
-                      margin: EdgeInsets.only(bottom: 1.h),
-                      decoration: BoxDecoration(
-                          color: AppColors.backgroundColor,
-                          borderRadius: BorderRadius.circular(5)),
-                    ),
-                  ),
-                  Shimmer.fromColors(
-                    baseColor: AppColors.cardBackgroundColor,
-                    highlightColor: AppColors.primaryColor.withOpacity(0.2),
-                    child: Container(
-                      height: 4.5.h,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(5),
-                          color: AppColors.cardBackgroundColor),
-                    ),
-                  ),
-                  Shimmer.fromColors(
-                    baseColor: AppColors.cardBackgroundColor,
-                    highlightColor: AppColors.primaryColor.withOpacity(0.2),
-                    child: Container(
-                      height: 3.5.h,
-                      margin: EdgeInsets.only(top: 1.h),
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(5),
-                          color: AppColors.cardBackgroundColor),
-                    ),
-                  ),
-                ],
-              ),
-            );
-          }),
+                  color: AppColors.cardBackgroundColor),
+            ),
+          ),
+          Shimmer.fromColors(
+            baseColor: AppColors.cardBackgroundColor,
+            highlightColor: AppColors.primaryColor.withOpacity(0.2),
+            child: Container(
+              height: 3.5.h,
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(5),
+                  color: AppColors.cardBackgroundColor),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

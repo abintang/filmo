@@ -1,19 +1,18 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'user_model.dart';
+part of 'genres_model.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-UserModel _$UserModelFromJson(Map<String, dynamic> json) => UserModel(
+GenresModel _$GenresModelFromJson(Map<String, dynamic> json) => GenresModel(
       id: (json['id'] as num).toInt(),
-      username: json['username'] as String,
       name: json['name'] as String,
     );
 
-Map<String, dynamic> _$UserModelToJson(UserModel instance) => <String, dynamic>{
+Map<String, dynamic> _$GenresModelToJson(GenresModel instance) =>
+    <String, dynamic>{
       'id': instance.id,
-      'username': instance.username,
       'name': instance.name,
     };

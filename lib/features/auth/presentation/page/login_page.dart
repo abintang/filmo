@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:filmo/core/constants/app_colors.dart';
 import 'package:filmo/core/widgets/buttons.dart';
 import 'package:filmo/core/widgets/textfield.dart';
@@ -8,6 +10,7 @@ import 'package:filmo/main_layout.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
@@ -147,7 +150,20 @@ class LoginPage extends StatelessWidget {
                       fontWeight: FontWeight.w600),
                 ),
                 TextButton(
-                    onPressed: () {},
+                    onPressed: () async {
+                      final Uri uri = Uri.parse(
+                          "https://www.themoviedb.org/signup?language=id-ID");
+                      try {
+                        if (!await launchUrl(
+                          uri,
+                          mode: LaunchMode.externalApplication,
+                        )) {
+                          throw 'Could not launch $uri';
+                        }
+                      } catch (e) {
+                        log('Error launching URL: $e');
+                      }
+                    },
                     child: Text(
                       "Register",
                       style: TextStyle(

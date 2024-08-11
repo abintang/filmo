@@ -3,6 +3,10 @@ import 'package:filmo/features/auth/data/data_sources/auth_remote_datasources.da
 import 'package:filmo/features/auth/data/repositories/auth_repository_impl.dart';
 import 'package:filmo/features/auth/domain/repositories/auth_repository.dart';
 import 'package:filmo/features/auth/domain/usecases/auth_user.dart';
+import 'package:filmo/features/detail_movie/data/data_source/detail_movie_remote_datasource.dart';
+import 'package:filmo/features/detail_movie/data/repositories/detail_movies_repository_impl.dart';
+import 'package:filmo/features/detail_movie/domain/repositories/detail_movies_repository.dart';
+import 'package:filmo/features/detail_movie/domain/usecase/get_detail_movies.dart';
 import 'package:filmo/features/home/data/data_sources/now_playing_remote_datasources.dart';
 import 'package:filmo/features/home/data/data_sources/popular_remote_datasources.dart';
 import 'package:filmo/features/home/data/repository/now_playing_repository_impl.dart';
@@ -86,4 +90,13 @@ void configure() async {
               getIt<FavoriteListRemoteDataSources>()));
   getIt.registerLazySingleton<GetFavoriteList>(() =>
       GetFavoriteList(favoriteListRepository: getIt<FavoriteListRepository>()));
+
+  // DI Detail Movies
+  getIt.registerLazySingleton<DetailMovieRemoteDataSources>(
+      () => DetailMovieRemoteDataSourcesImpl());
+  getIt.registerLazySingleton<DetailMoviesRepository>(() =>
+      DetailMoviesRepositoryImpl(
+          detailMovieRemoteDataSources: getIt<DetailMovieRemoteDataSources>()));
+  getIt.registerLazySingleton<GetDetailMovies>(() =>
+      GetDetailMovies(detailMoviesRepository: getIt<DetailMoviesRepository>()));
 }

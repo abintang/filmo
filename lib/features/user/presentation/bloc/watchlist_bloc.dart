@@ -5,13 +5,13 @@ import 'package:filmo/features/user/presentation/bloc/state/watchlist_state.dart
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class WatchlistBloc extends Bloc<WatchlistEvent, WatchlistState> {
-  WatchlistBloc() : super(LoadingState()) {
+  WatchlistBloc() : super(LoadingWatchlistState()) {
     on<LoadWatchlist>(_onLoadFavoriteList);
   }
 
   void _onLoadFavoriteList(
       LoadWatchlist event, Emitter<WatchlistState> emit) async {
-    emit(LoadingState());
+    emit(LoadingWatchlistState());
     try {
       final movies = await getIt.get<GetWatchlist>().call(event.id);
       emit(GetWatchlistSuccess(movies: movies));
