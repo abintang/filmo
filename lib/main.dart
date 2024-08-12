@@ -3,6 +3,7 @@ import 'package:filmo/core/di/dependency_injections.dart';
 import 'package:filmo/features/auth/presentation/bloc/login_bloc.dart';
 import 'package:filmo/features/auth/presentation/page/login_page.dart';
 import 'package:filmo/features/detail_movie/presentation/bloc/detail_movies_bloc.dart';
+import 'package:filmo/features/home/presentation/bloc/action_on_movie_bloc.dart';
 import 'package:filmo/features/home/presentation/bloc/now_playing_bloc.dart';
 import 'package:filmo/features/home/presentation/bloc/popular_movies_bloc.dart';
 import 'package:filmo/features/user/presentation/bloc/detail_user_bloc.dart';
@@ -33,7 +34,8 @@ class MainApp extends StatelessWidget {
             BlocProvider(create: (context) => DetailUserBloc()),
             BlocProvider(create: (context) => FavoriteListBloc()),
             BlocProvider(create: (context) => WatchlistBloc()),
-            BlocProvider(create: (context) => DetailMoviesBloc())
+            BlocProvider(create: (context) => DetailMoviesBloc()),
+            BlocProvider(create: (context) => ActionOnMovieBloc())
           ],
           child: MaterialApp(
             theme: ThemeData(

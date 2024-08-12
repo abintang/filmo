@@ -19,7 +19,7 @@ class _BottomNavState extends State<MainLayout> {
   @override
   Widget build(BuildContext context) {
     final List<Widget> _screens = [
-      const HomePage(),
+      HomePage(id: widget.id),
       UserPage(id: widget.id),
     ];
 

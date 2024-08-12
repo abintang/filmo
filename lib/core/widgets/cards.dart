@@ -13,6 +13,8 @@ class MoviesHorizontalCards extends StatelessWidget {
   final String imagePath;
   final String idMovie;
   final double marginLeft;
+  final VoidCallback onAddWatchlist;
+  final VoidCallback onAddFavorite;
 
   /// [MoviesHorizontalCards] adalah widget yang digunakan untuk menampilkan cards
   /// movies dengan bentuk horizontal.
@@ -23,7 +25,9 @@ class MoviesHorizontalCards extends StatelessWidget {
       required this.movieTitle,
       required this.ratings,
       required this.releaseDate,
-      required this.marginLeft});
+      required this.marginLeft,
+      required this.onAddWatchlist,
+      required this.onAddFavorite});
 
   @override
   Widget build(BuildContext context) {
@@ -132,7 +136,9 @@ class MoviesHorizontalCards extends StatelessWidget {
                         backgroundColorButton: Colors.transparent,
                         textButton: 'Add to Watchlist',
                         iconButton: Icons.watch_later_rounded,
-                        onTapButton: () {},
+                        onTapButton: () {
+                          onAddWatchlist();
+                        },
                         width: 36,
                         height: 3.5,
                         fontSize: 14,
@@ -146,7 +152,9 @@ class MoviesHorizontalCards extends StatelessWidget {
                         backgroundColorButton: Colors.transparent,
                         textButton: 'Add to Favorite',
                         iconButton: Icons.favorite,
-                        onTapButton: () {},
+                        onTapButton: () {
+                          onAddFavorite();
+                        },
                         width: 36,
                         height: 3.5,
                         fontSize: 14,

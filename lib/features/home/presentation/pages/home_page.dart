@@ -1,4 +1,6 @@
 import 'package:filmo/core/widgets/cards.dart';
+import 'package:filmo/features/home/presentation/bloc/action_on_movie_bloc.dart';
+import 'package:filmo/features/home/presentation/bloc/event/action_on_movie_event.dart.dart';
 import 'package:filmo/features/home/presentation/bloc/event/now_playing_event.dart';
 import 'package:filmo/features/home/presentation/bloc/event/popular_movies_event.dart';
 import 'package:filmo/features/home/presentation/bloc/now_playing_bloc.dart';
@@ -11,7 +13,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
 class HomePage extends StatelessWidget {
-  const HomePage({super.key});
+  final int id;
+  const HomePage({super.key, required this.id});
 
   @override
   Widget build(BuildContext context) {
@@ -59,6 +62,20 @@ class HomePage extends StatelessWidget {
                         ratings: state.movies[index].ratingLen,
                         releaseDate: state.movies[index].releaseDate,
                         marginLeft: (index == 0) ? 7 : 3,
+                        onAddFavorite: () {
+                          context.read<ActionOnMovieBloc>().add(
+                              AddListMovieEvent(
+                                  accountId: id,
+                                  movieId: state.movies[index].id,
+                                  saveType: "favorite"));
+                        },
+                        onAddWatchlist: () {
+                          context.read<ActionOnMovieBloc>().add(
+                              AddListMovieEvent(
+                                  accountId: id,
+                                  movieId: state.movies[index].id,
+                                  saveType: "watchlist"));
+                        },
                       );
                     },
                   ));
@@ -104,6 +121,20 @@ class HomePage extends StatelessWidget {
                         ratings: state.movies[index].ratingLen,
                         releaseDate: state.movies[index].releaseDate,
                         marginLeft: (index == 0) ? 7 : 3,
+                        onAddFavorite: () {
+                          context.read<ActionOnMovieBloc>().add(
+                              AddListMovieEvent(
+                                  accountId: id,
+                                  movieId: state.movies[index].id,
+                                  saveType: "favorite"));
+                        },
+                        onAddWatchlist: () {
+                          context.read<ActionOnMovieBloc>().add(
+                              AddListMovieEvent(
+                                  accountId: id,
+                                  movieId: state.movies[index].id,
+                                  saveType: "watchlist"));
+                        },
                       );
                     },
                   ));

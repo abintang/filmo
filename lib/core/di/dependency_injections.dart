@@ -7,14 +7,18 @@ import 'package:filmo/features/detail_movie/data/data_source/detail_movie_remote
 import 'package:filmo/features/detail_movie/data/repositories/detail_movies_repository_impl.dart';
 import 'package:filmo/features/detail_movie/domain/repositories/detail_movies_repository.dart';
 import 'package:filmo/features/detail_movie/domain/usecase/get_detail_movies.dart';
+import 'package:filmo/features/home/data/data_sources/add_movie_to_list_remote_datasource.dart';
 import 'package:filmo/features/home/data/data_sources/now_playing_remote_datasources.dart';
 import 'package:filmo/features/home/data/data_sources/popular_remote_datasources.dart';
+import 'package:filmo/features/home/data/repository/add_movie_to_list_repository_impl.dart';
 import 'package:filmo/features/home/data/repository/now_playing_repository_impl.dart';
 import 'package:filmo/features/home/data/repository/popular_repository_impl.dart';
+import 'package:filmo/features/home/domain/repository/add_movie_to_list_repository.dart';
 import 'package:filmo/features/home/domain/repository/now_playing_repository.dart';
 import 'package:filmo/features/home/domain/repository/popular_repository.dart';
 import 'package:filmo/features/home/domain/usecase/get_now_playing.dart';
 import 'package:filmo/features/home/domain/usecase/get_popular_movies.dart';
+import 'package:filmo/features/home/domain/usecase/post_movie_to_list.dart';
 import 'package:filmo/features/user/data/data_sources/detail_user_remote_datasource.dart';
 import 'package:filmo/features/user/data/data_sources/favorite_list_remote_datasources.dart';
 import 'package:filmo/features/user/data/data_sources/watchlist_remote_datasources.dart';
@@ -99,4 +103,23 @@ void configure() async {
           detailMovieRemoteDataSources: getIt<DetailMovieRemoteDataSources>()));
   getIt.registerLazySingleton<GetDetailMovies>(() =>
       GetDetailMovies(detailMoviesRepository: getIt<DetailMoviesRepository>()));
+
+  // DI Post Favorite
+  // getIt.registerLazySingleton<AddFavoriteRemoteDataSource>(
+  //     () => AddFavoriteRemoteDataSourceImpl());
+  // getIt.registerLazySingleton<AddFavoriteRepository>(() =>
+  //     AddFavoriteRepositoryImpl(
+  //         addFavoriteRemoteDataSource: getIt<AddFavoriteRemoteDataSource>()));
+  // getIt.registerLazySingleton<PostFavorite>(() =>
+  //     PostFavorite(addFavoriteRepository: getIt<AddFavoriteRepository>()));
+
+  // DI Post MovieList
+  getIt.registerLazySingleton<AddMovieToListRemoteDataSource>(
+      () => AddMovieToListRemoteDataSourceImpl());
+  getIt.registerLazySingleton<AddMovieToListRepository>(() =>
+      AddMovieToListRepositoryImpl(
+          addMovieToListRemoteDataSource:
+              getIt<AddMovieToListRemoteDataSource>()));
+  getIt.registerLazySingleton<PostMovieToList>(() => PostMovieToList(
+      addMovieToListRepository: getIt<AddMovieToListRepository>()));
 }
